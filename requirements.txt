@@ -1,0 +1,11 @@
+transformers
+datasets
+peft
+accelerate
+bitsandbytes
+pandas
+pyyaml         
+rouge-score    
+bert-score     
+nltk           
+
