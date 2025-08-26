@@ -1,0 +1,57 @@
+# Project parameter configuration
+model:
+  # Path to the local base model directory
+  base_path: "./models/qwen-model"
+  # Max token length for the model during training
+  max_length: 2048
+
+# Dataset settings
+dataset:
+  # Name of the dataset from Hugging Face Hub
+  name: "cnn_dailymail"
+  version: "3.0.0"
+  # Train on the first 160,000 samples of the official train dataset
+  train_split: "train[:160000]"
+  # Validate on the first 5,000 samples of the official validation dataset
+  validation_split: "validation[:5000]"
+  # Test on the first 10,000 samples of the official test dataset
+  test_split: "test[:10000]"
+
+lora:
+  r: 16
+  alpha: 32
+  dropout: 0.3
+  target_modules:
+    - "q_proj"
+    - "v_proj"
+    - "up_proj"
+    - "down_proj"
+
+# Training arguments
+training:
+  # Output directory
+  output_dir: "./results/160k_prompt_masking_run" 
+  num_epochs: 3 
+  batch_size: 1 
+  gradient_accumulation_steps: 4
+  learning_rate: 0.5e-4
+  warmup_steps: 100
+  # Log the loss every 50 steps
+  logging_steps: 50 
+  # Number of step to save/evaluate checkpoint 
+  save_steps: 1000 
+  eval_steps: 1000
+
+  metric_for_best_model: "eval_loss"
+  load_best_model_at_end: true
+  # Lower loss is better
+  greater_is_better: false
+  # Keep the best checkpoint and the nine most recent ones 
+  save_total_limit: 10 
+
+  fp16: true
+  # Adapter saved path
+  adapter_save_path: "./models/qwen-lora-adapter-160k_masking"
+  # Use weight decay to prevent overfitting
+  weight_decay: 0.01
+
