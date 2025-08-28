@@ -1,26 +1,26 @@
-# Project parameter configuration
+# Configuration for the Qwen Summarization Project
+# Model settings
 model:
-  # Path to the local base model directory
   base_path: "./models/qwen-model"
-  # Max token length for the model during training
   max_length: 2048
+
+# Prompt template for training and evaluation
+prompt:
+  template: "[INST] Summarize the following news article:\n\n{article}\n\nSummary: [/INST]"
 
 # Dataset settings
 dataset:
-  # Name of the dataset from Hugging Face Hub
   name: "cnn_dailymail"
   version: "3.0.0"
-  # Train on the first 160,000 samples of the official train dataset
-  train_split: "train[:160000]"
-  # Validate on the first 5,000 samples of the official validation dataset
+  train_split: "train[:260000]"
   validation_split: "validation[:5000]"
-  # Test on the first 10,000 samples of the official test dataset
   test_split: "test[:10000]"
 
+# LoRA settings
 lora:
   r: 16
   alpha: 32
-  dropout: 0.3
+  dropout: 0.5
   target_modules:
     - "q_proj"
     - "v_proj"
@@ -29,29 +29,37 @@ lora:
 
 # Training arguments
 training:
-  # Output directory
-  output_dir: "./results/160k_prompt_masking_run" 
-  num_epochs: 3 
-  batch_size: 1 
+  output_dir: "./results/output"
+  num_epochs: 3
+  batch_size: 1
   gradient_accumulation_steps: 4
-  learning_rate: 0.5e-4
+  learning_rate: 1.0e-5
   warmup_steps: 100
-  # Log the loss every 50 steps
-  logging_steps: 50 
-  # Number of step to save/evaluate checkpoint 
-  save_steps: 1000 
+  logging_steps: 50
+  save_steps: 1000
   eval_steps: 1000
-
   metric_for_best_model: "eval_loss"
   load_best_model_at_end: true
-  # Lower loss is better
   greater_is_better: false
-  # Keep the best checkpoint and the nine most recent ones 
-  save_total_limit: 10 
-
+  save_total_limit: 200
   fp16: true
-  # Adapter saved path
-  adapter_save_path: "./models/qwen-lora-adapter-160k_masking"
-  # Use weight decay to prevent overfitting
   weight_decay: 0.01
+  adapter_save_path: "./models/adapter"
+  optimizer: "paged_adamw_8bit"
+  lr_scheduler_type: "cosine"
+  max_grad_norm: 1.0
+  report_to: "none"
 
+# Evaluation and Test settings
+evaluation:
+  # - To evaluate a specific checkpoint, for example: "./results/160k_prompt_masking_run/checkpoint-8000"
+  # - If left blank, it will default to the 'adapter_save_path' in the 'training' section.
+  adapter_path_to_evaluate: "./results/260k_adapter/checkpoint-57000"
+  # Number of examples from the test set to evaluate on.
+  num_examples: 10000
+  batch_size: 128 # Batch size for inference
+  input_max_length: 1600 # Reserve space for the summary
+  generation:
+    max_new_tokens: 100
+    temperature: 0.0
+    do_sample: false 
