@@ -186,7 +186,6 @@ This section outlines the implementation workflow for developing the LoRA-based 
 
 ### 5.1 Development Environment Setup
 
-#### Infrastructure Requirements
 **Hardware Configuration**:
 - **GPU**: NVIDIA GPU A100 with 40GB memory
 - **OS**: Ubuntu 22.04
@@ -395,21 +394,6 @@ lora:
 - The evaluation was focused on two key metrics: ROUGE-L for lexical overlap and BERTScore F1 for semantic similarity, avoiding the overhead of running a large, redundant suite of metrics. The batched implementation was particularly critical for speeding up BERTScore calculations. 
 
 #### Performance Results
-
-**Final Performance Metrics**:
-📊 Base Model (10000 examples):
-  ROUGE-L: 0.2211
-  BERTScore F1: 0.8661
-  Avg Length: 77.6 words (ref: 54.2)
-
-🎯 LoRA Adapter (10000 examples):
-  ROUGE-L: 0.2972
-  BERTScore F1: 0.8893
-  Avg Length: 57.6 words (ref: 54.2)
-
-📈 Improvement:
-  ROUGE-L: +0.0761
-  BERTScore F1: +0.0232
 
 | Model | ROUGE-L | BERTScore F1 | Avg Gen Length |
 |-------|---------|--------------|----------------|
