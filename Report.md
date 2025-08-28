@@ -382,8 +382,9 @@ lora:
 - **Learning Rate**: Cosine decay schedule monitoring
 - **Gradient Norms**: Monitored for training stability
 
-### 5.6 Evaluation Implementation
+### 5.5 Evaluation Implementation
 **Objective**: To measure the summarization performance of the fine-tuned adapter against the original base model.
+
 **Challenge**: Evaluating the trained model on extensive test sets with metrics like BERTScore is very slow. 
 
 **Solution**: 
@@ -401,7 +402,7 @@ lora:
 | LoRA Adapter | 0.2972 | 0.8893 | 57.6 words (ref: 54.2) |
 | **Improvement** | **+0.0761 (+34.41%)** | **+0.0232 (+2.67%)** | **-20.0 words** |
 
-### 5.7 Post-Processing and Deployment
+### 5.6 Post-Processing and Deployment
 
 **Objective**: To establish a robust deployment pipeline that guarantees consistent model behavior between training and inference and reliably extracts the final summary from the model's raw output.
 
@@ -409,9 +410,9 @@ lora:
 
 **Solution**: The inference pipeline reuses the exact same tokenizer configuration and truncation logic developed for the training pipeline. Also, a summary extraction function is used to isolate the generated summary from the full output.
 
-### 5.6 Future Enhancements
+### 5.7 Future Enhancements
 
-#### 5.6.1 Context Window Extension
+#### 5.7.1 Context Window Extension
 
 **Objective**: Expand the model's effective context length from the current 2048-token limitation to handle long-form documents (8k-10k tokens). 
 
@@ -423,7 +424,7 @@ lora:
 
 - **Reduce Phase**: The intermediate summaries are concatenated and fed back into the model to generate a final, cohesive summary of the entire document. This process can be repeated recursively if needed.
 
-#### 5.6.2 Multi-Objective Loss Enhancement
+#### 5.7.2 Multi-Objective Loss Enhancement
 
 **Objective**: Replace the single cross-entropy loss with a multi-objective function that optimizes for more summarization criteria such as content coverage, factual accuracy, length control, and semantic coherence simultaneously.
 
