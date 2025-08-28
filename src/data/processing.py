@@ -88,7 +88,7 @@ def load_and_prepare_dataset(dataset_name: str, dataset_version: str, split: str
     """
     Loads and processes a specific split of the dataset.
     """
-    print(f"🔄 Loading and preparing split: {split}...")
+    print(f"Loading and preparing split: {split}...")
     
     tokenizer.model_max_length = max_length
     dataset = load_dataset(dataset_name, dataset_version, split=split)
@@ -107,7 +107,7 @@ def load_and_prepare_dataset(dataset_name: str, dataset_version: str, split: str
         remove_columns=['instruction', 'summary']
     )
 
-    print(f"✅ Split '{split}' ready with {len(tokenized_dataset)} examples.")
+    print(f"Split '{split}' ready with {len(tokenized_dataset)} examples.")
     return tokenized_dataset
 
 @dataclass

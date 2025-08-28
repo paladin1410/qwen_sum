@@ -19,4 +19,4 @@ snapshot_download(
     local_dir_use_symlinks=False
 )
 
-print(f"✅ Download complete. The model is in the '{SAVE_PATH}' directory.")
+print(f"Download complete. The model is in the '{SAVE_PATH}' directory.")

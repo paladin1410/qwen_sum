@@ -43,7 +43,7 @@ def main():
         handlers=[logging.FileHandler(log_file_path), logging.StreamHandler(sys.stdout)]
     )
     
-    logging.info("🔧 Configuration loaded successfully.")
+    logging.info("Configuration loaded successfully.")
     
     tokenizer = AutoTokenizer.from_pretrained(model_config['base_path'], local_files_only=True)
     if tokenizer.pad_token is None:

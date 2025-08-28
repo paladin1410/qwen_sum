@@ -464,9 +464,10 @@ qwen_sum/
 docker pull pytorch/pytorch:2.3.1-cuda11.8-cudnn8-devel
 
 # Run container with GPU access
-docker run --gpus all -it pytorch/pytorch:2.3.1-cuda11.8-cudnn8-devel
+docker run --gpus all --name qwen_sum -it pytorch/pytorch:2.3.1-cuda11.8-cudnn8-devel
 
 # Clone repository
+apt update && apt install -y git
 git clone https://github.com/paladin1410/qwen_sum.git
 cd qwen_sum
 
@@ -475,6 +476,12 @@ pip install -r requirements.txt
 ```
 
 ### Usage Instructions
+
+**First, download the Qwen 2.5 3B base model, this may take 1 hour**:
+
+```bash
+python download_models.py
+```
 
 #### Training the LoRA Adapter
 
@@ -527,7 +534,8 @@ Summary: [/INST]
 
 **Generated Output**:
 ```
-Shoplifting was the top physical crime in Singapore in H1 2025 with 2,097 cases, a 4.2% increase from 2023. Overall physical crime rose 5.4% to 10,341 cases. Shop theft accounts for 20.3% of total crime and remains a top youth offense.
+Shoplifting was the top physical crime in Singapore in the first half of 2025 . It was followed by robbery and burglary . The overall number of physical crime cases increased by 5.4 per cent .
+
 ```
 
 ### Trained Model Access
