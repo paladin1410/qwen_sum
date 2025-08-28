@@ -74,7 +74,7 @@ Summary: [/INST]
 **Example Raw Input:**
 ```json
 {
-  "LONDON, England (Reuters) -- Harry Potter star Daniel Radcliffe gains access to a reported £20 million ($41.1 million) fortune as he turns 18 on     Monday, but he insists the money won't cast a spell on him. Daniel Radcliffe as Harry Potter in \"Harry Potter and the Order of the Phoenix\" To the disappointment of gossip columnists around the world, the young actor says he has no plans to fritter his cash away on fast cars, drink and celebrity parties"
+  "Shoplifting was once again the top physical crime in Singapore, with 2,097 cases reported in the first half of 2025, the police said on Tuesday (Aug 26). This was a 4.2 per cent increase - or 84 cases - compared to the 2,013 cases last year from January to June. The overall number of physical crime cases similarly increased by 5.4 per cent to 10,341 in the first half of 2025, up from 9,809, according to mid-year statistics released by the Singapore Police Force (SPF). Shop theft accounted for 20.3 per cent of total crime, forming the largest proportion of cases. It also remains one of the top offences committed by youths."
 }
 ```
 
